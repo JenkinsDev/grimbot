@@ -13,6 +13,19 @@ class Config:
     def __init__(self):
         self._data = None
 
+    def merge_config(self, conf_dict):
+        """Merges `conf_dict` with `self._data` if `self._data` contains
+        configuration values.
+
+        Parameters:
+            conf_dict (dict): Configuration dictionary to merge with our data.
+        """
+        if self._data is None:
+            self._data = conf_dict
+        else:
+            for k, v in conf_dict.items():
+                self._data[k] = v
+
     def load_file(self, config_file):
         """Merges configuration values found within
         the `config_file`.
@@ -24,8 +37,8 @@ class Config:
             raise FileNotFoundError("file does not exist: {}".format(
                 config_file))
 
-        # TODO: Finish loading and testing configuration parsing
         data = self._parse_config_file(config_file)
+        self.merge_config(data)
 
     @staticmethod
     def _parse_config_file(config_file):
