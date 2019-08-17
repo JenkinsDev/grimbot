@@ -1,0 +1,17 @@
+# VIM
+## Temp Files
+*.swo
+*.swp
+
+# Python
+## Cache Files/Dirs
+__pycache__/
+*.pyc
+
+## Testing Cache
+.pytest_cache/
+
+
+# Application Specific Files
+.env
+!.env.example
