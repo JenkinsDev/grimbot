@@ -21,6 +21,10 @@ class TestGrimBot:
     def setup(self):
         self.faux_config = {"DISCORD_SECRET": "xyz"}
 
+    def test_command_prefix_defaults_to_exclamation_point(self, patched_grimbot):
+        bot = patched_grimbot()
+        assert bot.command_prefix == '!'
+
     def test_listen_raises_valueerror_if_config_not_set(self, patched_grimbot):
         no_config_bot = patched_grimbot()
         with pytest.raises(ValueError):

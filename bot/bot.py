@@ -11,6 +11,7 @@ class GrimBot(Client):
     Parameters:
         config (config.Config): Used to set the _config object property.
     """
+    command_prefix = '!'
 
     def __init__(self, config=None):
         super().__init__()
