@@ -8,8 +8,9 @@
 __pycache__/
 *.pyc
 
-## Testing Cache
+## Pytest Cache/Coverage Files
 .pytest_cache/
+.coverage
 
 
 # Application Specific Files
