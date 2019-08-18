@@ -14,4 +14,4 @@ test_debug:
 	$(testcmd) --pdb
 
 coverage:
-	python -m pytest --cov=$(dir) tests
+	$(testcmd) --cov=$(dir) tests
