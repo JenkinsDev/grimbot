@@ -16,6 +16,7 @@ faux_configuration_dict = {
     "RANDOM": "101"
 }
 
+
 @pytest.fixture()
 def faux_config_file(tmpdir):
     p = tmpdir.mkdir("grimbot").join(".env.testing")
@@ -40,8 +41,12 @@ class TestConfig:
         self.config._data = mock_config_values(self.faux_config_path)
         assert self.config['mock_key'] == 'mock_value'
 
+    def test_can_test_presence_with_in(self):
+        self.config._data = mock_config_values(self.faux_config_path)
+        assert 'mock_key' in self.config
+
     def test_config_returns_none_if_key_does_not_exist(self):
-        assert self.config['mock_key'] == None
+        assert self.config['mock_key'] is None
 
     def test__parse_config_file_calls_dotenv_values(self, monkeypatch):
         with monkeypatch.context() as m:

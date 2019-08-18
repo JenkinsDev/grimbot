@@ -14,10 +14,13 @@ class Config:
         self._data = None
 
     def __getitem__(self, name):
-        if self._data is None or not name in self._data:
+        if self._data is None or not self.__contains__(name):
             return None
 
         return self._data[name]
+
+    def __contains__(self, name):
+        return name in self._data
 
     def merge_config(self, conf_dict):
         """Merges `conf_dict` with `self._data` if `self._data` contains

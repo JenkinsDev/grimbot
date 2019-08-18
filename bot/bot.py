@@ -29,19 +29,22 @@ class GrimBot(Client):
             raise ValueError("_config must be set before running GrimBot")
 
         if 'DISCORD_SECRET' not in self._config:
-            raise ValueError("_config must contain a DISCORD_SECRET key/value.")
+            raise ValueError("_config must contain a DISCORD_SECRET key")
 
         self.run(self._config['DISCORD_SECRET'])
 
     async def on_ready(self):
-        """Called when our bot has successfully connected to a server, and is
+        """Called when our bot has successfully connected to a guild, and is
         ready to start processing commands."""
         print(f'We have logged in as {self.user}')
 
     async def on_message(self, msg):
         """Called when our bot has successfully intercepted a message sent
-        to a server / channel that our bot can read from."""
+        to a guild / channel the bot can read from."""
         if msg.author == self.user:
             return
 
         await msg.channel.send(msg.content)
+
+    async def on_error(self, err):
+        print(f'error {err}')
