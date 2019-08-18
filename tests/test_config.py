@@ -36,6 +36,13 @@ class TestConfig:
     def test_initializes_with_empty_data(self):
         assert self.config._data is None
 
+    def test_config_is_subscriptable_by_accessing_underlying_data(self):
+        self.config._data = mock_config_values(self.faux_config_path)
+        assert self.config['mock_key'] == 'mock_value'
+
+    def test_config_returns_none_if_key_does_not_exist(self):
+        assert self.config['mock_key'] == None
+
     def test__parse_config_file_calls_dotenv_values(self, monkeypatch):
         with monkeypatch.context() as m:
             m.setattr("bot.config.dotenv_values", mock_config_values)

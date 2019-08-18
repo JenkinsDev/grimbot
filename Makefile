@@ -1,4 +1,5 @@
 dir=bot
+testcmd=python -m pytest
 
 development:
 	ENVIRONMENT=development python -m $(dir)
@@ -7,7 +8,10 @@ production:
 	ENVRIONMENT=production python -m $(dir)
 
 test:
-	pytest
+	$(testcmd)
+
+test_debug:
+	$(testcmd) --pdb
 
 coverage:
-	pytest --cov=$(dir) tests
+	python -m pytest --cov=$(dir) tests

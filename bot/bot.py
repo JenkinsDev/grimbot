@@ -13,7 +13,25 @@ class GrimBot(Client):
     """
 
     def __init__(self, config=None):
+        super().__init__()
         self._config = config
+
+    def listen(self):
+        """Connect to Discord and start listening on all channels the bot
+        has access to.
+
+        Note: This function is blocking and will start an event loop.
+
+        Raises:
+            ValueError: If _config or _config['DISCORD_SECRET'] is not set.
+        """
+        if self._config is None:
+            raise ValueError("_config must be set before running GrimBot")
+
+        if 'DISCORD_SECRET' not in self._config:
+            raise ValueError("_config must contain a DISCORD_SECRET key/value.")
+
+        self.run(self._config['DISCORD_SECRET'])
 
     async def on_ready(self):
         """Called when our bot has successfully connected to a server, and is
@@ -27,4 +45,3 @@ class GrimBot(Client):
             return
 
         await msg.channel.send(msg.content)
-
