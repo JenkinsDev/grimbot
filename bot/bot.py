@@ -1,4 +1,5 @@
 from discord import Client
+from .__version__ import __version__
 
 
 class GrimBot(Client):
