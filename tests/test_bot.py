@@ -1,7 +1,6 @@
 import pytest
 
 from unittest.mock import MagicMock
-from discord import Client
 from bot.bot import GrimBot
 
 
@@ -12,7 +11,7 @@ def patched_grimbot(monkeypatch):
     about the bot attempting to connect to the discord server.
     """
     with monkeypatch.context() as m:
-        m.setattr("bot.bot.Client.run", MagicMock())
+        m.setattr("bot.bot.Bot.run", MagicMock())
         yield GrimBot
 
 

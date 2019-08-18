@@ -19,4 +19,9 @@ if __name__ == "__main__":
     logger.info(f'[Starting GrimBot v{__version__}]')
 
     bot = GrimBot(config=config)
+
+    logger.info('Loading bot extensions...')
+    bot.load_extension('bot.cogs.event_scheduler')
+    logger.info('Finished loading bot extensions!')
+
     bot.listen()

@@ -1,7 +1,7 @@
-from discord import Client
+from discord.ext.commands import Bot
 
 
-class GrimBot(Client):
+class GrimBot(Bot):
     """The meat of GrimBot, acts as the interface between Discord and the rest
     of our application.
 
@@ -14,7 +14,7 @@ class GrimBot(Client):
     command_prefix = '!'
 
     def __init__(self, config=None):
-        super().__init__()
+        super().__init__(self.command_prefix)
         self._config = config
 
     def listen(self):
@@ -37,15 +37,7 @@ class GrimBot(Client):
     async def on_ready(self):
         """Called when our bot has successfully connected to a guild, and is
         ready to start processing commands."""
-        print(f'We have logged in as {self.user}')
-
-    async def on_message(self, msg):
-        """Called when our bot has successfully intercepted a message sent
-        to a guild / channel the bot can read from."""
-        if msg.author == self.user:
-            return
-
-        await msg.channel.send(msg.content)
+        print(f"We have logged in as {self.user}")
 
     async def on_error(self, err):
-        print(f'error {err}')
+        print(f"error intercepted: {err}")
